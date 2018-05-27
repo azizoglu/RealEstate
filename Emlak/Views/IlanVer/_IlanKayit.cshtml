@@ -1,0 +1,228 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="~/assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>İLAN KAYDI</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--  Material Dashboard CSS    -->
+    <link href="~/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="~/assets/css/demo.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons" rel='stylesheet'>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"
+            type="text/javascript"></script>
+</head>
+<body>
+    @RenderBody()
+    <div class="wrapper">
+        @Html.Partial("_SideBar");
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                @Html.Partial("_Header");
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        @model Emlak.ModelView.IlanKayitModel
+                        @using (@Html.BeginForm("IlanTalep", "IlanVer", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                        {
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="purple">
+                                        <h4 class="title">İlan Talep</h4>
+                                        <p class="category">İlan Bilgilerini Giriniz</p>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">BAŞLIK</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.BASLIK, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">FİYAT</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.FIYAT, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">YAYIN SÜRESİ</label>
+                                                    @Html.TextBox("txtYayinSuresi", "", new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">KATEGORİ</label>
+                                                    @Html.DropDownListFor(model => model.Ilan.KATEGORI_ID, ViewBag.Kategoriler as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">İL</label>
+                                                    @Html.DropDownListFor(model => model.Adres.IL_ID, ViewBag.Iller as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">İLÇE</label>
+                                                    @Html.DropDownListFor(model => model.Adres.ILCE_ID, ViewBag.Ilceler as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">ADRES</label>
+                                                    @Html.TextBoxFor(model => model.Adres.DETAY, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">KONUT TİPİ</label>
+                                                    @Html.DropDownListFor(model => model.Ilan.KONUT_TIP_ID, ViewBag.KonutTipleri as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">CEPHE</label>
+                                                    @Html.DropDownListFor(model => model.Ilan.CEPHE_ID, ViewBag.Cepheler as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">ISINMA TİPİ</label>
+                                                    @Html.DropDownListFor(model => model.Ilan.ISINMA_TIP_ID, ViewBag.IsinmaTipleri as SelectList, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">BİNA YAŞI</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.BINA_YASI, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">ODA SAYISI</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.ODA_SAYISI, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">SALON SAYISI</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.SALON_SAYISI, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">BANYO SAYISI</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.BANYO_SAYISI, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">M2</label>
+                                                    @Html.TextBoxFor(model => model.Ilan.M2, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">EŞYALI</label>
+                                                    @Html.DropDownListFor(model => model.Ilan.ESYALI, Emlak.ModelView.IlanKayitModel.GetEsya(), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>AÇIKLAMA</label>
+                                                    <div class="form-group label-floating">
+                                                        @Html.TextAreaFor(model => model.Ilan.ACIKLAMA, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary pull-right" value="GÖNDER" />
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="card card-profile">
+                                        <div class="card-avatar">
+                                            <a href="#pablo">
+                                                <img class="img" src="../Resources/Images/Default_Emlak.png" />
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="category text-gray">İLAN RESMİ</h6>
+                                            <p class="card-content">
+                                                İlanınıza Resim Yükleyin
+                                            </p>
+                                            <input type="file" name="yuklenen_dosya" id="file" style="width: 100%;padding-left:15px; padding-bottom:15px;" accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="card card-profile">
+                                        <a class="btn btn-primary pull-right" href="@Url.Action("IlanKonum", "IlanVer")">KONUM SEÇ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_Footer");
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="~/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/material.min.js" type="text/javascript"></script>
+    <!--  Charts Plugin -->
+    <script src="~/assets/js/chartist.min.js"></script>
+    <!--  Dynamic Elements plugin -->
+    <script src="~/assets/js/arrive.min.js"></script>
+    <!--  PerfectScrollbar Library -->
+    <script src="~/assets/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/assets/js/bootstrap-notify.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADwwYWF-zWTTUwr8uExSJU-Tu1vrwJetc"></script>
+    <!-- Material Dashboard javascript methods -->
+    <script src="~/assets/js/material-dashboard.js?v=1.2.0"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/assets/js/demo.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!--Kütüphanelerimizin online olduğunu bu yüzden sayfa çalışırken, internet bağlantımızın aktif olması
+        gerektiğini lütfen göz önünde bulundurun.-->
+    <!--Tarih seçicimizi burada hazırlayacağız-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtYayinSuresi").datepicker();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EMLAKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADRES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IL_ID" Type="Int32" />
+    <Property Name="ILCE_ID" Type="Int32" />
+    <Property Name="MAHALLE_ID" Type="Int32" />
+    <Property Name="DETAY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IL" Relationship="Self.FK_ADRES_IL" FromRole="ADRES" ToRole="IL" />
+    <NavigationProperty Name="ILCE" Relationship="Self.FK_ADRES_ILCE" FromRole="ADRES" ToRole="ILCE" />
+    <NavigationProperty Name="MAHALLE" Relationship="Self.FK_ADRES_MAHALLE" FromRole="ADRES" ToRole="MAHALLE" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_ADRES" FromRole="ADRES" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="ALT_KATEGORI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_ALT_KATEGORI" FromRole="ALT_KATEGORI" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="BIREYSEL_UYE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SOYAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CINSIYET" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TEL_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ADRES" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IL_ID" Type="Int32" />
+    <Property Name="ILCE_ID" Type="Int32" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_UYE_BIREYSEL_UYE" FromRole="BIREYSEL_UYE" ToRole="UYE" />
+  </EntityType>
+  <EntityType Name="CEPHE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_CEPHE" FromRole="CEPHE" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="DIS_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN_DIS_OZELLIK" Relationship="Self.FK_ILAN_DIS_OZELLIK_DIS_OZELLIK" FromRole="DIS_OZELLIK" ToRole="ILAN_DIS_OZELLIK" />
+  </EntityType>
+  <EntityType Name="DURUM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_DURUM" FromRole="DURUM" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="IC_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ILAN_IC_OZELLIK" Relationship="Self.FK_ILAN_IC_OZELLIK_IC_OZELLIK" FromRole="IC_OZELLIK" ToRole="ILAN_IC_OZELLIK" />
+  </EntityType>
+  <EntityType Name="IL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KODU" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ADI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ADRES" Relationship="Self.FK_ADRES_IL" FromRole="IL" ToRole="ADRES" />
+    <NavigationProperty Name="ILCE" Relationship="Self.FK_ILCE_IL" FromRole="IL" ToRole="ILCE" />
+    <NavigationProperty Name="TAKIP" Relationship="Self.FK_TAKIP_IL" FromRole="IL" ToRole="TAKIP" />
+  </EntityType>
+  <EntityType Name="ILAN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UYE_ID" Type="Int32" />
+    <Property Name="ADRES_ID" Type="Int32" />
+    <Property Name="CEPHE_ID" Type="Int32" />
+    <Property Name="KATEGORI_ID" Type="Int32" />
+    <Property Name="ALT_KATEGORI_ID" Type="Int32" />
+    <Property Name="KONUT_TIP_ID" Type="Int32" />
+    <Property Name="ISINMA_TIP_ID" Type="Int32" />
+    <Property Name="BASLIK" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="YAYIN_SURESI" Type="DateTime" Precision="3" />
+    <Property Name="FIYAT" Type="Int32" />
+    <Property Name="BINA_YASI" Type="Int32" />
+    <Property Name="ODA_SAYISI" Type="Int32" />
+    <Property Name="SALON_SAYISI" Type="Int32" />
+    <Property Name="BANYO_SAYISI" Type="Int32" />
+    <Property Name="M2" Type="Int32" />
+    <Property Name="KREDIYE_UYGUNLUK" Type="Boolean" />
+    <Property Name="ESYALI" Type="Boolean" />
+    <Property Name="ACIKLAMA" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="KOORDINAT_X" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="KOORDINAT_Y" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="DURUM_ID" Type="Int32" />
+    <NavigationProperty Name="ADRES" Relationship="Self.FK_ILAN_ADRES" FromRole="ILAN" ToRole="ADRES" />
+    <NavigationProperty Name="ALT_KATEGORI" Relationship="Self.FK_ILAN_ALT_KATEGORI" FromRole="ILAN" ToRole="ALT_KATEGORI" />
+    <NavigationProperty Name="CEPHE" Relationship="Self.FK_ILAN_CEPHE" FromRole="ILAN" ToRole="CEPHE" />
+    <NavigationProperty Name="DURUM" Relationship="Self.FK_ILAN_DURUM" FromRole="ILAN" ToRole="DURUM" />
+    <NavigationProperty Name="ILAN_DIS_OZELLIK" Relationship="Self.FK_ILAN_DIS_OZELLIK_ILAN" FromRole="ILAN" ToRole="ILAN_DIS_OZELLIK" />
+    <NavigationProperty Name="ILAN_IC_OZELLIK" Relationship="Self.FK_ILAN_IC_OZELLIK_ILAN" FromRole="ILAN" ToRole="ILAN_IC_OZELLIK" />
+    <NavigationProperty Name="ISINMA_TIP" Relationship="Self.FK_ILAN_ISINMA_TIP" FromRole="ILAN" ToRole="ISINMA_TIP" />
+    <NavigationProperty Name="KATEGORI" Relationship="Self.FK_ILAN_KATEGORI" FromRole="ILAN" ToRole="KATEGORI" />
+    <NavigationProperty Name="ILAN_KONUM_OZELLIK" Relationship="Self.FK_ILAN_KONUM_OZELLIK_ILAN" FromRole="ILAN" ToRole="ILAN_KONUM_OZELLIK" />
+    <NavigationProperty Name="KONUT_TIP" Relationship="Self.FK_ILAN_KONUT_TIP" FromRole="ILAN" ToRole="KONUT_TIP" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_ILAN_UYE" FromRole="ILAN" ToRole="UYE" />
+    <NavigationProperty Name="RESIM" Relationship="Self.FK_RESIM_ILAN" FromRole="ILAN" ToRole="RESIM" />
+    <NavigationProperty Name="SATIS" Relationship="Self.FK_SATIS_ILAN" FromRole="ILAN" ToRole="SATIS" />
+  </EntityType>
+  <EntityType Name="ILAN_DIS_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DIS_OZELLIK_ID" Type="Int32" />
+    <Property Name="ILAN_ID" Type="Int32" />
+    <NavigationProperty Name="DIS_OZELLIK" Relationship="Self.FK_ILAN_DIS_OZELLIK_DIS_OZELLIK" FromRole="ILAN_DIS_OZELLIK" ToRole="DIS_OZELLIK" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_DIS_OZELLIK_ILAN" FromRole="ILAN_DIS_OZELLIK" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="ILAN_IC_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IC_OZELLIK_ID" Type="Int32" />
+    <Property Name="ILAN_ID" Type="Int32" />
+    <NavigationProperty Name="IC_OZELLIK" Relationship="Self.FK_ILAN_IC_OZELLIK_IC_OZELLIK" FromRole="ILAN_IC_OZELLIK" ToRole="IC_OZELLIK" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_IC_OZELLIK_ILAN" FromRole="ILAN_IC_OZELLIK" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="ILAN_KONUM_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KONUM_OZELLIK_ID" Type="Int32" />
+    <Property Name="ILAN_ID" Type="Int32" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_KONUM_OZELLIK_ILAN" FromRole="ILAN_KONUM_OZELLIK" ToRole="ILAN" />
+    <NavigationProperty Name="KONUM_OZELLIK" Relationship="Self.FK_ILAN_KONUM_OZELLIK_KONUM_OZELLIK" FromRole="ILAN_KONUM_OZELLIK" ToRole="KONUM_OZELLIK" />
+  </EntityType>
+  <EntityType Name="ILCE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KODU" Type="Int32" Nullable="false" />
+    <Property Name="ADI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IL_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ADRES" Relationship="Self.FK_ADRES_ILCE" FromRole="ILCE" ToRole="ADRES" />
+    <NavigationProperty Name="IL" Relationship="Self.FK_ILCE_IL" FromRole="ILCE" ToRole="IL" />
+    <NavigationProperty Name="TAKIP" Relationship="Self.FK_TAKIP_ILCE" FromRole="ILCE" ToRole="TAKIP" />
+  </EntityType>
+  <EntityType Name="ISINMA_TIP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIPI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_ISINMA_TIP" FromRole="ISINMA_TIP" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="KATEGORI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_KATEGORI" FromRole="KATEGORI" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="KONUM_OZELLIK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN_KONUM_OZELLIK" Relationship="Self.FK_ILAN_KONUM_OZELLIK_KONUM_OZELLIK" FromRole="KONUM_OZELLIK" ToRole="ILAN_KONUM_OZELLIK" />
+  </EntityType>
+  <EntityType Name="KONUT_TIP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIPI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_KONUT_TIP" FromRole="KONUT_TIP" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="KULLANICI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UYE_ID" Type="Int32" />
+    <Property Name="YETKI_ID" Type="Int32" />
+    <Property Name="KULLANICI_ADI" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SIFRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_KULLANICI_UYE" FromRole="KULLANICI" ToRole="UYE" />
+    <NavigationProperty Name="YETKI" Relationship="Self.FK_KULLANICI_YETKI" FromRole="KULLANICI" ToRole="YETKI" />
+  </EntityType>
+  <EntityType Name="KURUMSAL_TUR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KURUMSAL_UYE" Relationship="Self.FK_KURUMSAL_UYE_KURUMSAL_TUR" FromRole="KURUMSAL_TUR" ToRole="KURUMSAL_UYE" />
+  </EntityType>
+  <EntityType Name="KURUMSAL_UYE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KURUMSAL_TUR_ID" Type="Int32" />
+    <Property Name="RESMI_AD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="KISA_AD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="YETKILI_AD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="YETKILI_SOYAD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DOGUM_TARIHI" Type="DateTime" Precision="3" />
+    <Property Name="TEL_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IL_ID" Type="Int32" />
+    <Property Name="ILCE_ID" Type="Int32" />
+    <Property Name="ADRES" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KURUMSAL_TUR" Relationship="Self.FK_KURUMSAL_UYE_KURUMSAL_TUR" FromRole="KURUMSAL_UYE" ToRole="KURUMSAL_TUR" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_UYE_KURUMSAL_UYE" FromRole="KURUMSAL_UYE" ToRole="UYE" />
+  </EntityType>
+  <EntityType Name="MAHALLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ADRES" Relationship="Self.FK_ADRES_MAHALLE" FromRole="MAHALLE" ToRole="ADRES" />
+    <NavigationProperty Name="TAKIP" Relationship="Self.FK_TAKIP_MAHALLE" FromRole="MAHALLE" ToRole="TAKIP" />
+  </EntityType>
+  <EntityType Name="RESIM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ILAN_ID" Type="Int32" />
+    <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LINK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_RESIM_ILAN" FromRole="RESIM" ToRole="ILAN" />
+  </EntityType>
+  <EntityType Name="SATIS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SATILAN_ILAN_ID" Type="Int32" />
+    <Property Name="SATIN_ALAN_ID" Type="Int32" />
+    <Property Name="SATIS_GERCEKLESTIREN_ID" Type="Int32" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_SATIS_ILAN" FromRole="SATIS" ToRole="ILAN" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_SATIS_UYE" FromRole="SATIS" ToRole="UYE" />
+    <NavigationProperty Name="UYE1" Relationship="Self.FK_SATIS_UYE_GERCEKLESTIREN" FromRole="SATIS" ToRole="UYE" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TAKIP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IL_ID" Type="Int32" />
+    <Property Name="ILCE_ID" Type="Int32" />
+    <Property Name="MAHALLE_ID" Type="Int32" />
+    <Property Name="DETAY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IL" Relationship="Self.FK_TAKIP_IL" FromRole="TAKIP" ToRole="IL" />
+    <NavigationProperty Name="ILCE" Relationship="Self.FK_TAKIP_ILCE" FromRole="TAKIP" ToRole="ILCE" />
+    <NavigationProperty Name="MAHALLE" Relationship="Self.FK_TAKIP_MAHALLE" FromRole="TAKIP" ToRole="MAHALLE" />
+  </EntityType>
+  <EntityType Name="TALEP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ILAN_ID" Type="Int32" />
+    <Property Name="ILAN_SAHIP_ID" Type="Int32" />
+    <Property Name="TALEP_EDEN_ID" Type="Int32" />
+    <Property Name="TALEP_DURUM_ID" Type="Int32" />
+    <NavigationProperty Name="TALEP_DURUM" Relationship="Self.FK_TALEP_TALEP_DURUM" FromRole="TALEP" ToRole="TALEP_DURUM" />
+    <NavigationProperty Name="UYE" Relationship="Self.FK_TALEP_UYE" FromRole="TALEP" ToRole="UYE" />
+    <NavigationProperty Name="UYE1" Relationship="Self.FK_TALEP_UYE1" FromRole="TALEP" ToRole="UYE" />
+  </EntityType>
+  <EntityType Name="TALEP_DURUM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AD" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TALEP" Relationship="Self.FK_TALEP_TALEP_DURUM" FromRole="TALEP_DURUM" ToRole="TALEP" />
+  </EntityType>
+  <EntityType Name="UYE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UYE_ID" Type="Int32" />
+    <Property Name="UYE_TURU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UYE_DURUMU" Type="Boolean" />
+    <NavigationProperty Name="BIREYSEL_UYE" Relationship="Self.FK_UYE_BIREYSEL_UYE" FromRole="UYE" ToRole="BIREYSEL_UYE" />
+    <NavigationProperty Name="ILAN" Relationship="Self.FK_ILAN_UYE" FromRole="UYE" ToRole="ILAN" />
+    <NavigationProperty Name="KULLANICI" Relationship="Self.FK_KULLANICI_UYE" FromRole="UYE" ToRole="KULLANICI" />
+    <NavigationProperty Name="KURUMSAL_UYE" Relationship="Self.FK_UYE_KURUMSAL_UYE" FromRole="UYE" ToRole="KURUMSAL_UYE" />
+    <NavigationProperty Name="SATIS" Relationship="Self.FK_SATIS_UYE" FromRole="UYE" ToRole="SATIS" />
+    <NavigationProperty Name="SATIS1" Relationship="Self.FK_SATIS_UYE_GERCEKLESTIREN" FromRole="UYE" ToRole="SATIS" />
+    <NavigationProperty Name="TALEP" Relationship="Self.FK_TALEP_UYE" FromRole="UYE" ToRole="TALEP" />
+    <NavigationProperty Name="TALEP1" Relationship="Self.FK_TALEP_UYE1" FromRole="UYE" ToRole="TALEP" />
+  </EntityType>
+  <EntityType Name="YETKI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ADI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ACIKLAMA" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KULLANICI" Relationship="Self.FK_KULLANICI_YETKI" FromRole="YETKI" ToRole="KULLANICI" />
+  </EntityType>
+  <Association Name="FK_ADRES_IL">
+    <End Role="IL" Type="Self.IL" Multiplicity="0..1" />
+    <End Role="ADRES" Type="Self.ADRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ADRES">
+        <PropertyRef Name="IL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADRES_ILCE">
+    <End Role="ILCE" Type="Self.ILCE" Multiplicity="0..1" />
+    <End Role="ADRES" Type="Self.ADRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILCE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ADRES">
+        <PropertyRef Name="ILCE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ADRES_MAHALLE">
+    <End Role="MAHALLE" Type="Self.MAHALLE" Multiplicity="0..1" />
+    <End Role="ADRES" Type="Self.ADRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAHALLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ADRES">
+        <PropertyRef Name="MAHALLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_ADRES">
+    <End Role="ADRES" Type="Self.ADRES" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADRES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="ADRES_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_ALT_KATEGORI">
+    <End Role="ALT_KATEGORI" Type="Self.ALT_KATEGORI" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ALT_KATEGORI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="ALT_KATEGORI_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UYE_BIREYSEL_UYE">
+    <End Role="BIREYSEL_UYE" Type="Self.BIREYSEL_UYE" Multiplicity="0..1" />
+    <End Role="UYE" Type="Self.UYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BIREYSEL_UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UYE">
+        <PropertyRef Name="UYE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_CEPHE">
+    <End Role="CEPHE" Type="Self.CEPHE" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CEPHE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="CEPHE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_DIS_OZELLIK_DIS_OZELLIK">
+    <End Role="DIS_OZELLIK" Type="Self.DIS_OZELLIK" Multiplicity="0..1" />
+    <End Role="ILAN_DIS_OZELLIK" Type="Self.ILAN_DIS_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DIS_OZELLIK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_DIS_OZELLIK">
+        <PropertyRef Name="DIS_OZELLIK_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_DURUM">
+    <End Role="DURUM" Type="Self.DURUM" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DURUM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="DURUM_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_IC_OZELLIK_IC_OZELLIK">
+    <End Role="IC_OZELLIK" Type="Self.IC_OZELLIK" Multiplicity="0..1" />
+    <End Role="ILAN_IC_OZELLIK" Type="Self.ILAN_IC_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IC_OZELLIK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_IC_OZELLIK">
+        <PropertyRef Name="IC_OZELLIK_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILCE_IL">
+    <End Role="IL" Type="Self.IL" Multiplicity="1" />
+    <End Role="ILCE" Type="Self.ILCE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILCE">
+        <PropertyRef Name="IL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TAKIP_IL">
+    <End Role="IL" Type="Self.IL" Multiplicity="0..1" />
+    <End Role="TAKIP" Type="Self.TAKIP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TAKIP">
+        <PropertyRef Name="IL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_DIS_OZELLIK_ILAN">
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="0..1" />
+    <End Role="ILAN_DIS_OZELLIK" Type="Self.ILAN_DIS_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_DIS_OZELLIK">
+        <PropertyRef Name="ILAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_IC_OZELLIK_ILAN">
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="0..1" />
+    <End Role="ILAN_IC_OZELLIK" Type="Self.ILAN_IC_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_IC_OZELLIK">
+        <PropertyRef Name="ILAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_ISINMA_TIP">
+    <End Role="ISINMA_TIP" Type="Self.ISINMA_TIP" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ISINMA_TIP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="ISINMA_TIP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_KATEGORI">
+    <End Role="KATEGORI" Type="Self.KATEGORI" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KATEGORI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="KATEGORI_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_KONUM_OZELLIK_ILAN">
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="0..1" />
+    <End Role="ILAN_KONUM_OZELLIK" Type="Self.ILAN_KONUM_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_KONUM_OZELLIK">
+        <PropertyRef Name="ILAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_KONUT_TIP">
+    <End Role="KONUT_TIP" Type="Self.KONUT_TIP" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KONUT_TIP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="KONUT_TIP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_UYE">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN">
+        <PropertyRef Name="UYE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESIM_ILAN">
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="0..1" />
+    <End Role="RESIM" Type="Self.RESIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RESIM">
+        <PropertyRef Name="ILAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SATIS_ILAN">
+    <End Role="ILAN" Type="Self.ILAN" Multiplicity="0..1" />
+    <End Role="SATIS" Type="Self.SATIS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SATIS">
+        <PropertyRef Name="SATILAN_ILAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ILAN_KONUM_OZELLIK_KONUM_OZELLIK">
+    <End Role="KONUM_OZELLIK" Type="Self.KONUM_OZELLIK" Multiplicity="0..1" />
+    <End Role="ILAN_KONUM_OZELLIK" Type="Self.ILAN_KONUM_OZELLIK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KONUM_OZELLIK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ILAN_KONUM_OZELLIK">
+        <PropertyRef Name="KONUM_OZELLIK_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TAKIP_ILCE">
+    <End Role="ILCE" Type="Self.ILCE" Multiplicity="0..1" />
+    <End Role="TAKIP" Type="Self.TAKIP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ILCE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TAKIP">
+        <PropertyRef Name="ILCE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KULLANICI_UYE">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KULLANICI">
+        <PropertyRef Name="UYE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KULLANICI_YETKI">
+    <End Role="YETKI" Type="Self.YETKI" Multiplicity="0..1" />
+    <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YETKI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KULLANICI">
+        <PropertyRef Name="YETKI_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KURUMSAL_UYE_KURUMSAL_TUR">
+    <End Role="KURUMSAL_TUR" Type="Self.KURUMSAL_TUR" Multiplicity="0..1" />
+    <End Role="KURUMSAL_UYE" Type="Self.KURUMSAL_UYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUMSAL_TUR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KURUMSAL_UYE">
+        <PropertyRef Name="KURUMSAL_TUR_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UYE_KURUMSAL_UYE">
+    <End Role="KURUMSAL_UYE" Type="Self.KURUMSAL_UYE" Multiplicity="0..1" />
+    <End Role="UYE" Type="Self.UYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KURUMSAL_UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UYE">
+        <PropertyRef Name="UYE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TAKIP_MAHALLE">
+    <End Role="MAHALLE" Type="Self.MAHALLE" Multiplicity="0..1" />
+    <End Role="TAKIP" Type="Self.TAKIP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MAHALLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TAKIP">
+        <PropertyRef Name="MAHALLE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SATIS_UYE">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="SATIS" Type="Self.SATIS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SATIS">
+        <PropertyRef Name="SATIN_ALAN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SATIS_UYE_GERCEKLESTIREN">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="SATIS" Type="Self.SATIS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SATIS">
+        <PropertyRef Name="SATIS_GERCEKLESTIREN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TALEP_TALEP_DURUM">
+    <End Role="TALEP_DURUM" Type="Self.TALEP_DURUM" Multiplicity="0..1" />
+    <End Role="TALEP" Type="Self.TALEP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALEP_DURUM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TALEP">
+        <PropertyRef Name="TALEP_DURUM_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TALEP_UYE">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="TALEP" Type="Self.TALEP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TALEP">
+        <PropertyRef Name="TALEP_EDEN_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TALEP_UYE1">
+    <End Role="UYE" Type="Self.UYE" Multiplicity="0..1" />
+    <End Role="TALEP" Type="Self.TALEP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UYE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TALEP">
+        <PropertyRef Name="ILAN_SAHIP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EMLAKEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADRES" EntityType="Self.ADRES" />
+    <EntitySet Name="ALT_KATEGORI" EntityType="Self.ALT_KATEGORI" />
+    <EntitySet Name="BIREYSEL_UYE" EntityType="Self.BIREYSEL_UYE" />
+    <EntitySet Name="CEPHE" EntityType="Self.CEPHE" />
+    <EntitySet Name="DIS_OZELLIK" EntityType="Self.DIS_OZELLIK" />
+    <EntitySet Name="DURUM" EntityType="Self.DURUM" />
+    <EntitySet Name="IC_OZELLIK" EntityType="Self.IC_OZELLIK" />
+    <EntitySet Name="IL" EntityType="Self.IL" />
+    <EntitySet Name="ILAN" EntityType="Self.ILAN" />
+    <EntitySet Name="ILAN_DIS_OZELLIK" EntityType="Self.ILAN_DIS_OZELLIK" />
+    <EntitySet Name="ILAN_IC_OZELLIK" EntityType="Self.ILAN_IC_OZELLIK" />
+    <EntitySet Name="ILAN_KONUM_OZELLIK" EntityType="Self.ILAN_KONUM_OZELLIK" />
+    <EntitySet Name="ILCE" EntityType="Self.ILCE" />
+    <EntitySet Name="ISINMA_TIP" EntityType="Self.ISINMA_TIP" />
+    <EntitySet Name="KATEGORI" EntityType="Self.KATEGORI" />
+    <EntitySet Name="KONUM_OZELLIK" EntityType="Self.KONUM_OZELLIK" />
+    <EntitySet Name="KONUT_TIP" EntityType="Self.KONUT_TIP" />
+    <EntitySet Name="KULLANICI" EntityType="Self.KULLANICI" />
+    <EntitySet Name="KURUMSAL_TUR" EntityType="Self.KURUMSAL_TUR" />
+    <EntitySet Name="KURUMSAL_UYE" EntityType="Self.KURUMSAL_UYE" />
+    <EntitySet Name="MAHALLE" EntityType="Self.MAHALLE" />
+    <EntitySet Name="RESIM" EntityType="Self.RESIM" />
+    <EntitySet Name="SATIS" EntityType="Self.SATIS" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TAKIP" EntityType="Self.TAKIP" />
+    <EntitySet Name="TALEP" EntityType="Self.TALEP" />
+    <EntitySet Name="TALEP_DURUM" EntityType="Self.TALEP_DURUM" />
+    <EntitySet Name="UYE" EntityType="Self.UYE" />
+    <EntitySet Name="YETKI" EntityType="Self.YETKI" />
+    <AssociationSet Name="FK_ADRES_IL" Association="Self.FK_ADRES_IL">
+      <End Role="IL" EntitySet="IL" />
+      <End Role="ADRES" EntitySet="ADRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADRES_ILCE" Association="Self.FK_ADRES_ILCE">
+      <End Role="ILCE" EntitySet="ILCE" />
+      <End Role="ADRES" EntitySet="ADRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ADRES_MAHALLE" Association="Self.FK_ADRES_MAHALLE">
+      <End Role="MAHALLE" EntitySet="MAHALLE" />
+      <End Role="ADRES" EntitySet="ADRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_ADRES" Association="Self.FK_ILAN_ADRES">
+      <End Role="ADRES" EntitySet="ADRES" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_ALT_KATEGORI" Association="Self.FK_ILAN_ALT_KATEGORI">
+      <End Role="ALT_KATEGORI" EntitySet="ALT_KATEGORI" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UYE_BIREYSEL_UYE" Association="Self.FK_UYE_BIREYSEL_UYE">
+      <End Role="BIREYSEL_UYE" EntitySet="BIREYSEL_UYE" />
+      <End Role="UYE" EntitySet="UYE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_CEPHE" Association="Self.FK_ILAN_CEPHE">
+      <End Role="CEPHE" EntitySet="CEPHE" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_DIS_OZELLIK_DIS_OZELLIK" Association="Self.FK_ILAN_DIS_OZELLIK_DIS_OZELLIK">
+      <End Role="DIS_OZELLIK" EntitySet="DIS_OZELLIK" />
+      <End Role="ILAN_DIS_OZELLIK" EntitySet="ILAN_DIS_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_DURUM" Association="Self.FK_ILAN_DURUM">
+      <End Role="DURUM" EntitySet="DURUM" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_IC_OZELLIK_IC_OZELLIK" Association="Self.FK_ILAN_IC_OZELLIK_IC_OZELLIK">
+      <End Role="IC_OZELLIK" EntitySet="IC_OZELLIK" />
+      <End Role="ILAN_IC_OZELLIK" EntitySet="ILAN_IC_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILCE_IL" Association="Self.FK_ILCE_IL">
+      <End Role="IL" EntitySet="IL" />
+      <End Role="ILCE" EntitySet="ILCE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TAKIP_IL" Association="Self.FK_TAKIP_IL">
+      <End Role="IL" EntitySet="IL" />
+      <End Role="TAKIP" EntitySet="TAKIP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_DIS_OZELLIK_ILAN" Association="Self.FK_ILAN_DIS_OZELLIK_ILAN">
+      <End Role="ILAN" EntitySet="ILAN" />
+      <End Role="ILAN_DIS_OZELLIK" EntitySet="ILAN_DIS_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_IC_OZELLIK_ILAN" Association="Self.FK_ILAN_IC_OZELLIK_ILAN">
+      <End Role="ILAN" EntitySet="ILAN" />
+      <End Role="ILAN_IC_OZELLIK" EntitySet="ILAN_IC_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_ISINMA_TIP" Association="Self.FK_ILAN_ISINMA_TIP">
+      <End Role="ISINMA_TIP" EntitySet="ISINMA_TIP" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_KATEGORI" Association="Self.FK_ILAN_KATEGORI">
+      <End Role="KATEGORI" EntitySet="KATEGORI" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_KONUM_OZELLIK_ILAN" Association="Self.FK_ILAN_KONUM_OZELLIK_ILAN">
+      <End Role="ILAN" EntitySet="ILAN" />
+      <End Role="ILAN_KONUM_OZELLIK" EntitySet="ILAN_KONUM_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_KONUT_TIP" Association="Self.FK_ILAN_KONUT_TIP">
+      <End Role="KONUT_TIP" EntitySet="KONUT_TIP" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_UYE" Association="Self.FK_ILAN_UYE">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="ILAN" EntitySet="ILAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESIM_ILAN" Association="Self.FK_RESIM_ILAN">
+      <End Role="ILAN" EntitySet="ILAN" />
+      <End Role="RESIM" EntitySet="RESIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SATIS_ILAN" Association="Self.FK_SATIS_ILAN">
+      <End Role="ILAN" EntitySet="ILAN" />
+      <End Role="SATIS" EntitySet="SATIS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ILAN_KONUM_OZELLIK_KONUM_OZELLIK" Association="Self.FK_ILAN_KONUM_OZELLIK_KONUM_OZELLIK">
+      <End Role="KONUM_OZELLIK" EntitySet="KONUM_OZELLIK" />
+      <End Role="ILAN_KONUM_OZELLIK" EntitySet="ILAN_KONUM_OZELLIK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TAKIP_ILCE" Association="Self.FK_TAKIP_ILCE">
+      <End Role="ILCE" EntitySet="ILCE" />
+      <End Role="TAKIP" EntitySet="TAKIP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KULLANICI_UYE" Association="Self.FK_KULLANICI_UYE">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="KULLANICI" EntitySet="KULLANICI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KULLANICI_YETKI" Association="Self.FK_KULLANICI_YETKI">
+      <End Role="YETKI" EntitySet="YETKI" />
+      <End Role="KULLANICI" EntitySet="KULLANICI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KURUMSAL_UYE_KURUMSAL_TUR" Association="Self.FK_KURUMSAL_UYE_KURUMSAL_TUR">
+      <End Role="KURUMSAL_TUR" EntitySet="KURUMSAL_TUR" />
+      <End Role="KURUMSAL_UYE" EntitySet="KURUMSAL_UYE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UYE_KURUMSAL_UYE" Association="Self.FK_UYE_KURUMSAL_UYE">
+      <End Role="KURUMSAL_UYE" EntitySet="KURUMSAL_UYE" />
+      <End Role="UYE" EntitySet="UYE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TAKIP_MAHALLE" Association="Self.FK_TAKIP_MAHALLE">
+      <End Role="MAHALLE" EntitySet="MAHALLE" />
+      <End Role="TAKIP" EntitySet="TAKIP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SATIS_UYE" Association="Self.FK_SATIS_UYE">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="SATIS" EntitySet="SATIS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SATIS_UYE_GERCEKLESTIREN" Association="Self.FK_SATIS_UYE_GERCEKLESTIREN">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="SATIS" EntitySet="SATIS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TALEP_TALEP_DURUM" Association="Self.FK_TALEP_TALEP_DURUM">
+      <End Role="TALEP_DURUM" EntitySet="TALEP_DURUM" />
+      <End Role="TALEP" EntitySet="TALEP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TALEP_UYE" Association="Self.FK_TALEP_UYE">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="TALEP" EntitySet="TALEP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TALEP_UYE1" Association="Self.FK_TALEP_UYE1">
+      <End Role="UYE" EntitySet="UYE" />
+      <End Role="TALEP" EntitySet="TALEP" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

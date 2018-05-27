@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="sidebar" data-color="purple" data-image="~/assets/img/sidebar-1.jpg">
+    <div class="logo">
+        <a href="#" class="simple-text">
+            EMLAK PROJESİ
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+           @foreach (var menu in @ViewBag.Menu)
+           {
+            <li class=@menu.AKTIF>
+                <a href=@menu.ADRES>
+                    <i class="material-icons">@menu.ICON</i>
+                    <p>@menu.ADI</p>
+                </a>
+            </li>
+           }
+        </ul>
+    </div>
+</div>
