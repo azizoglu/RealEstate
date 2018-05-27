@@ -3,6 +3,6 @@
 * text=auto
 
 * linguist-vendored
-*.css linguist-vendored=false
+*.cs linguist-vendored=false
 *.h linguist-vendored=false
 *.m linguist-vendored=false
