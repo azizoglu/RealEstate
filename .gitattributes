@@ -4,5 +4,3 @@
 
 * linguist-vendored
 *.cs linguist-vendored=false
-*.h linguist-vendored=false
-*.m linguist-vendored=false
