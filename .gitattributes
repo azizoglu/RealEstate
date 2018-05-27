@@ -3,4 +3,4 @@
 * text=auto
 
 * linguist-vendored
-*.mvc linguist-vendored=false
+*.cs linguist-vendored=false
